@@ -39,6 +39,17 @@ func _ready():
 	width = size
 	height = size
 	
+	camerastart = Vector3(size/2, size/2+size/8, size/8)
+	camera.set_translation(camerastart)
+	
+	diamond_square()
+	
+	make_terrain()
+	
+	#player is moved to the center of the map
+	playerstart = Vector3(size/2, map[size/2][-size/2]+10, -size/2)
+	player.set_translation(playerstart)
+	
 func _input(event):
 	
 	if event.is_action_pressed("ui_focus_next"): #press Tab to toggle between cameras
