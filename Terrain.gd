@@ -1,4 +1,3 @@
-#https://godotengine.org/qa/36046/how-can-i-instance-by-code
 
 extends Spatial
 
