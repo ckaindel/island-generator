@@ -8,4 +8,4 @@ Press SPACE to create a new map.
 Press Tab to toggle between overview camera and first person camera.
 Use cursor keys to control player.
 
-A very clear explanation of the diamond square algorithm can be found here: https://youtu.be/4GuAV1PnurU
+A good explanation of the diamond square algorithm can be found here: https://youtu.be/4GuAV1PnurU
