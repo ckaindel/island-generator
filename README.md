@@ -1,5 +1,5 @@
 # Island Generator
-A simple terrain generator for the Godot engine based on the diamond square algorithm.
+A simple terrain generator created in Godot 3.5, based on the diamond square algorithm.
 
 There are no controls yet to control map size, island size or roughness. Map corners and all edge values are set to 0 to create islands.
 
