@@ -49,7 +49,7 @@ func _input(event):
 
 	if event.is_action_pressed("ui_select"): #press SPACE to generate islands
 		
-		camerastart = Vector3(size/2, size/2+size/8, size/4)
+		camerastart = Vector3(size/2, size/2+size/8, size/8)
 		camera.set_translation(camerastart)
 		
 		diamond_square()
