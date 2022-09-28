@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="Diamond Square Test 160922"
+config/name="Diamond Square Island Generator"
 run/main_scene="res://Main.tscn"
 
 [physics]
