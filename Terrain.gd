@@ -25,6 +25,12 @@ var vertices = PoolVector3Array()
 var UVs = PoolVector2Array()
 var normals = PoolVector3Array()
 
+var height_gradient = Gradient.new() #color gradient for texturing based on height
+var sand = Color(0.96,0.92,0.47)
+var rock = Color(0.62,0.69,0.50)
+var grass = Color(0.13,0.69,0.02)
+var snow = Color(0.95,0.95,0.95)
+
 onready var player = $Player
 onready var egocam = $Player/Egocam
 onready var camera = $Camera
@@ -38,6 +44,16 @@ func _ready():
 	
 	width = size
 	height = size
+	
+	#creating the color gradient
+	height_gradient.set_color(0, sand)
+	height_gradient.remove_point(1)
+	height_gradient.add_point(3, sand)
+	height_gradient.add_point(7, grass)
+	height_gradient.add_point(16, grass)
+	height_gradient.add_point(19, rock)
+	height_gradient.add_point(27, rock)
+	height_gradient.add_point(30, snow)
 	
 	camerastart = Vector3(size/2, size/2+size/8, size/8)
 	camera.set_translation(camerastart)
@@ -90,22 +106,12 @@ func make_terrain():
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	st.set_material(load("res://terrain_material.tres"))
 	
-	for v in vertices.size(): #vertex color for different elevations
+	for v in vertices.size(): #assign color to vertices according to height
 		var heightcolor
-		var sandheight = 3
-		var grassheight = 17
-		var rockheight = 25
-		var sand = Color(0.96,0.92,0.47)
-		var rock = Color(0.62,0.69,0.50)
-		var grass = Color(0.13,0.69,0.02)
-		var snow = Color(0.95,0.95,0.95)
-		
-		if vertices[v].y <= sandheight:
-			heightcolor = sand
-		elif vertices[v].y > sandheight && vertices[v].y <= grassheight:
-			heightcolor = grass
-		elif vertices[v].y > grassheight && vertices[v].y <= rockheight:
-			heightcolor = rock
+		if vertices[v].y <= 0:
+			heightcolor = height_gradient.get_color(0)
+		elif vertices[v].y > 0 && vertices[v].y < 50:
+			heightcolor = height_gradient.interpolate(vertices[v].y)
 		else:
 			heightcolor = snow
 		st.add_color(heightcolor)
