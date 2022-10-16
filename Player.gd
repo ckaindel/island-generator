@@ -3,7 +3,6 @@ extends KinematicBody
 var speed = 500
 var rotate_speed = 2
 var speed_temp = speed
-var level_size = 128
 var direction = Vector3()
 var gravity = -10
 var velocity = Vector3()
@@ -15,7 +14,7 @@ var angle
 var controller
 var playerpos
 
-
+onready var level_size = get_parent().size #128
 
 
 # Called when the node enters the scene tree for the first time.

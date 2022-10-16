@@ -1,4 +1,3 @@
-
 extends Spatial
 
 var rng = RandomNumberGenerator.new()
@@ -14,11 +13,11 @@ var height
 var chunk = size
 var roughness #scope of randval
 var half
-var randval #random value to be added to average height value
+var randval #random value to be added to average position
 
 # jitter is the amount that roughness changes between recursions.
 # Best values are between 2 (very rough terrain) and 3 (gently rolling hills).
-var jitter = 2.5
+var jitter = 2.2
 
 #arrays for MeshArray generation
 var vertices = PoolVector3Array()
@@ -65,6 +64,11 @@ func _ready():
 	#player is moved to the center of the map
 	playerstart = Vector3(size/2, map[size/2][-size/2]+10, -size/2)
 	player.set_translation(playerstart)
+	
+	
+func _on_Roughness_slider_value_changed(value):
+	jitter = value
+	
 	
 func _input(event):
 	
@@ -115,6 +119,7 @@ func make_terrain():
 		else:
 			heightcolor = snow
 		st.add_color(heightcolor)
+		
 		st.add_normal(Vector3(0,1,0))
 		st.add_uv(UVs[v])
 		st.add_vertex(vertices[v])
@@ -180,7 +185,6 @@ func create_quad(x,y):
 
 
 func diamond_square():
-	
 	map.clear()
 	chunk = size
 	roughness = size/jitter
@@ -204,31 +208,31 @@ func diamond_square():
 		roughness /= jitter
 
 
-func square_step(): #sets the center of the current square to the average of the NW, NE, SW and SE corners, plus a random value
+func square_step():
 	for y in range(0, size, chunk):
 		for x in range(0, size, chunk):
-			randval = rng.randf_range(-roughness,roughness)
+			randval = rng.randf_range(-roughness/2,roughness/2)
 			map[y+half][x+half]=float((map[y][x]+map[y][x+chunk]+map[y+chunk][x]+map[y+chunk][x+chunk])/4 + randval)
 
 
-func diamond_step(): #sets the center of the current diamond to the average of the N, E, S and W values, plus a random value
+func diamond_step():
 	for y in range(0, mapsize, half):
 		for x in range((y+half)%chunk, mapsize, chunk):
-			randval = rng.randf_range(-roughness,roughness)
-			
-			#edge cases only have 3 neighbors. For a tiling terrain, the 4th value can be set to the opposite edge. They are only relevant in the diamond step.
+			randval = rng.randf_range(-roughness/2,roughness/2)
+			#edge cases are only relevant in the diamond step.
 			#for island creation edge values are set to 0. Uncomment to create regular terrain.
-			if x == 0: 
-				map[y][x] = 0
+			if x == 0:
+				continue 
 				#map[y][x] = float((map[y-half][x] + map[y][x+half] + map[y+half][x])/3 + randval)
 			elif x == size:
-				map[y][x] = 0
+				continue 
 				#map[y][x] = float((map[y-half][x] + map[y][x-half] + map[y+half][x])/3 + randval)
 			elif y == 0:
-				map[y][x] = 0
+				continue 
 				#map[y][x] = float((map[y+half][x] + map[y][x-half] + map[y][x+half])/3 + randval)
 			elif y == size:
-				map[y][x] = 0
+				continue 
 				#map[y][x] = float((map[y-half][x] + map[y][x-half] + map[y][x+half])/3 + randval)
 			else:
 				map[y][x] = float((map[y-half][x] + map[y][x-half] + map[y][x+half] + map[y+half][x])/4 + randval)
+
