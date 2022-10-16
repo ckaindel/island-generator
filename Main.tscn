@@ -74,7 +74,7 @@ light_indirect_energy = 0.5
 light_specular = 0.206
 shadow_enabled = true
 shadow_color = Color( 0.188235, 0.262745, 0.192157, 1 )
-directional_shadow_mode = 0
+directional_shadow_mode = 1
 directional_shadow_max_distance = 300.0
 
 [connection signal="mouse_exited" from="Control/Roughness_slider" to="Control/Roughness_slider" method="_on_Roughness_slider_mouse_exited"]

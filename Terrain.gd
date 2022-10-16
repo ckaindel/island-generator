@@ -107,8 +107,10 @@ func make_terrain():
 			create_quad(x,y)
 
 	var st = SurfaceTool.new()
-
+	
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st.add_smooth_group(true)
+	
 	st.set_material(load("res://terrain_material.tres"))
 	
 	for v in vertices.size(): #assign color to vertices according to height
@@ -125,6 +127,7 @@ func make_terrain():
 		st.add_uv(UVs[v])
 		st.add_vertex(vertices[v])
 	
+	st.generate_normals()
 	#create a new terrain MeshInstance and add it as a child
 	var terrainmesh_new = MeshInstance.new()
 	add_child(terrainmesh_new)
