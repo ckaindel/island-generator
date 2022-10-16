@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Terrain.gd" type="Script" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://water_material.tres" type="Material" id=3]
+[ext_resource path="res://Roughness_slider.gd" type="Script" id=4]
 
 [sub_resource type="PlaneMesh" id=5]
 
@@ -39,8 +40,10 @@ min_value = 1.7
 max_value = 2.7
 step = 0.1
 value = 2.2
+scrollable = false
 tick_count = 5
 ticks_on_borders = true
+script = ExtResource( 4 )
 
 [node name="Terrain" type="Spatial" parent="."]
 script = ExtResource( 1 )
@@ -74,4 +77,5 @@ shadow_color = Color( 0.188235, 0.262745, 0.192157, 1 )
 directional_shadow_mode = 0
 directional_shadow_max_distance = 300.0
 
+[connection signal="mouse_exited" from="Control/Roughness_slider" to="Control/Roughness_slider" method="_on_Roughness_slider_mouse_exited"]
 [connection signal="value_changed" from="Control/Roughness_slider" to="Terrain" method="_on_Roughness_slider_value_changed"]

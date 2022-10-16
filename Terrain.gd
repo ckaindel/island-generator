@@ -72,6 +72,7 @@ func _on_Roughness_slider_value_changed(value):
 	
 func _input(event):
 	
+	
 	if event.is_action_pressed("ui_focus_next"): #press Tab to toggle between cameras
 		if egocam.is_current():
 			camera.make_current()
@@ -235,4 +236,5 @@ func diamond_step():
 				#map[y][x] = float((map[y-half][x] + map[y][x-half] + map[y][x+half])/3 + randval)
 			else:
 				map[y][x] = float((map[y-half][x] + map[y][x-half] + map[y][x+half] + map[y+half][x])/4 + randval)
+
 
