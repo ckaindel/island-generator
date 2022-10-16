@@ -1,3 +1,4 @@
+![islandgen_title](https://user-images.githubusercontent.com/15831620/196045997-5f2d139c-ab25-456e-bd14-c9a685c37bc0.png)
 # Island Generator
 A simple terrain generator created in Godot 3.5, based on the diamond square algorithm. You can view the whole island or explore it in first person view.
 
