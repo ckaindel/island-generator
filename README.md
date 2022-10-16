@@ -3,7 +3,7 @@ A simple terrain generator created in Godot 3.5, based on the diamond square alg
 
 There are no controls yet to control map size or island size. Also no export options. Map corners and all edge values are set to 0 to create islands.
 
-Run the generator in Godot.
+* Run the generator in Godot.
 Press SPACE to create a new map.
 Press Tab to toggle between overview camera and first person camera.
 Use cursor keys to control player.
